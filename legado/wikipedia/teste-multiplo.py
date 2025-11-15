@@ -55,8 +55,10 @@ def find_paths(start_title, end_title, max_depth=2, max_paths=5):
     return G, found_paths
 
 # ========== 4️⃣ Entrada do usuário ==========
-start = input("Digite o primeiro assunto: ").strip()
-end = input("Digite o segundo assunto: ").strip()
+# start = input("Digite o primeiro assunto: ").strip()
+# end = input("Digite o segundo assunto: ").strip()
+start = "Neymar"
+end = "Barack Obama"
 
 print(f"\n🔎 Procurando caminhos entre '{start}' e '{end}' (no máximo 5, profundidade até 3)...\n")
 
@@ -71,19 +73,19 @@ if paths:
 else:
     print("❌ Nenhum caminho encontrado dentro da profundidade definida.")
 
-# ========== 7️⃣ Visualização opcional ==========
-if paths:
-    sub_nodes = set(node for path in paths for node in path)
-    subG = G.subgraph(sub_nodes)
+# # ========== 7️⃣ Visualização opcional ==========
+# if paths:
+#     sub_nodes = set(node for path in paths for node in path)
+#     subG = G.subgraph(sub_nodes)
 
-    plt.figure(figsize=(12, 8))
-    nx.draw(
-        subG,
-        with_labels=True,
-        node_color='lightblue',
-        node_size=1500,
-        arrows=True,
-        font_size=8
-    )
-    plt.title(f"Caminhos entre '{start}' e '{end}' (no máximo 5, profundidade 3)")
-    plt.show()
+#     plt.figure(figsize=(12, 8))
+#     nx.draw(
+#         subG,
+#         with_labels=True,
+#         node_color='lightblue',
+#         node_size=1500,
+#         arrows=True,
+#         font_size=8
+#     )
+#     plt.title(f"Caminhos entre '{start}' e '{end}' (no máximo 5, profundidade 3)")
+#     plt.show()
