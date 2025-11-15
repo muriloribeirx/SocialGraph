@@ -22,50 +22,52 @@ def gerar_edges(start_title, end_title, max_depth, max_paths):
     [('Neymar', 'Estados Unidos'), ('Estados Unidos', 'Barack Obama')]
     """
     
-    queue = deque([(start_title, [start_title])])
-    visited = set()
-    found_paths = []
+    # queue = deque([(start_title, [start_title])])
+    # visited = set()
+    # found_paths = []
 
-    while queue and len(found_paths) < max_paths:
-        current_page, path = queue.popleft()
+    # while queue and len(found_paths) < max_paths:
+    #     current_page, path = queue.popleft()
 
-        if current_page in visited:
-            continue
-        visited.add(current_page)
+    #     if current_page in visited:
+    #         continue
+    #     visited.add(current_page)
 
-        if len(path) > max_depth:
-            continue
+    #     if len(path) > max_depth:
+    #         continue
 
-        links = get_links(current_page)
+    #     links = get_links(current_page)
 
-        for link in links:
-            new_path = path + [link]
+    #     for link in links:
+    #         new_path = path + [link]
 
-            if link == end_title:
-                found_paths.append(new_path)
-                if len(found_paths) >= max_paths:
-                    break
-            else:
-                queue.append((link, new_path))
+    #         if link == end_title:
+    #             found_paths.append(new_path)
+    #             if len(found_paths) >= max_paths:
+    #                 break
+    #         else:
+    #             queue.append((link, new_path))
 
     # ---- extrai somente arestas dos caminhos encontrados ----
-    edges = []
-    seen = set()
+    edges = [('Neymar', 'Estados Unidos'), ('Estados Unidos', 'Barack Obama')] # PARA TESTES USAR SOMENTE ESSA LINHA E COMENTAR AS OUTRAS DESSA FUNCAO
+    # edges = []
 
-    for path in found_paths:
-        for i in range(len(path) - 1):
-            edge = (path[i], path[i+1])
-            if edge not in seen:
-                edges.append(edge)
-                seen.add(edge)
+    # seen = set()
+
+    # for path in found_paths:
+    #     for i in range(len(path) - 1):
+    #         edge = (path[i], path[i+1])
+    #         if edge not in seen:
+    #             edges.append(edge)
+    #             seen.add(edge)
     print(edges)
     return edges
 
 
-# # ========== Teste temporário ==========
-# start = "Neymar"
-# end = "Barack Obama"
-# max_depth = 2
-# max_paths = 1
+# ========== Teste temporário ==========
+start = "Neymar"
+end = "Barack Obama"
+max_depth = 2
+max_paths = 1
 
-# gerar_edges(start, end, max_depth, max_paths)
+gerar_edges(start, end, max_depth, max_paths)
