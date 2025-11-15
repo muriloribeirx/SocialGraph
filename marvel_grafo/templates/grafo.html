@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Grafo de conexões de {{ personagem }}</title>
+    <style>
+        body {
+            background-color: #0d1117;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        iframe {
+            width: 90%;
+            height: 750px;
+            border: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Grafo de conexões de {{ personagem }}</h1>
+    <p>Mostrando até 20 conexões</p>
+    <iframe src="{{ url_for('serve_static', filename=arquivo) }}"></iframe>
+    <br>
+    <a href="/">Voltar</a>
+</body>
+</html>

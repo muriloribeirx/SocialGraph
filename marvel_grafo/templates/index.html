@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Grafo Marvel</title>
+  <style>
+    body {
+      background-color: #0d1117;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+    input {
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: none;
+      width: 300px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 18px;
+      margin-left: 10px;
+    }
+    button:hover {
+      background-color: #e63946;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔍 Grafo de Personagens da Marvel</h1>
+  <form method="POST" action="/grafo">
+    <input type="text" name="personagem" placeholder="Ex: Spider-Man" required>
+    <button type="submit">Gerar Grafo</button>
+  </form>
+</body>
+</html>

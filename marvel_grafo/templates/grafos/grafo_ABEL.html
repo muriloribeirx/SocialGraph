@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 750px;
+                 background-color: #0d1117;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "lightblue", "font": {"color": "white"}, "id": "BAKER", "label": "BAKER", "shape": "dot", "size": 20}, {"color": "lightblue", "font": {"color": "white"}, "id": "BOOMER/TABITHA SMITH", "label": "BOOMER/TABITHA SMITH", "shape": "dot", "size": 20}, {"color": "lightblue", "font": {"color": "white"}, "id": "THUNDERBIRD II/JAMES", "label": "THUNDERBIRD II/JAMES", "shape": "dot", "size": 20}, {"color": "lightblue", "font": {"color": "white"}, "id": "TSUNG, MARCUS", "label": "TSUNG, MARCUS", "shape": "dot", "size": 20}, {"color": "red", "font": {"color": "white"}, "id": "ABEL", "label": "ABEL", "shape": "dot", "size": 40}, {"color": "lightblue", "font": {"color": "white"}, "id": "BEDLAM/JESSE AARONSO", "label": "BEDLAM/JESSE AARONSO", "shape": "dot", "size": 20}, {"color": "lightblue", "font": {"color": "white"}, "id": "WISDOM, ROMANY", "label": "WISDOM, ROMANY", "shape": "dot", "size": 20}, {"color": "lightblue", "font": {"color": "white"}, "id": "TRAVELER", "label": "TRAVELER", "shape": "dot", "size": 20}, {"color": "lightblue", "font": {"color": "white"}, "id": "WISDOM, PETER", "label": "WISDOM, PETER", "shape": "dot", "size": 20}, {"color": "lightblue", "font": {"color": "white"}, "id": "DOMINO III/BEATRICE/", "label": "DOMINO III/BEATRICE/", "shape": "dot", "size": 20}, {"color": "lightblue", "font": {"color": "white"}, "id": "CHARLIE", "label": "CHARLIE", "shape": "dot", "size": 20}, {"color": "lightblue", "font": {"color": "white"}, "id": "CANNONBALL II/SAM GU", "label": "CANNONBALL II/SAM GU", "shape": "dot", "size": 20}]);
+                  edges = new vis.DataSet([{"color": "gray", "from": "BAKER", "to": "ABEL"}, {"color": "gray", "from": "BAKER", "to": "BEDLAM/JESSE AARONSO"}, {"color": "gray", "from": "BAKER", "to": "BOOMER/TABITHA SMITH"}, {"color": "gray", "from": "BAKER", "to": "CANNONBALL II/SAM GU"}, {"color": "gray", "from": "BAKER", "to": "CHARLIE"}, {"color": "gray", "from": "BAKER", "to": "DOMINO III/BEATRICE/"}, {"color": "gray", "from": "BAKER", "to": "THUNDERBIRD II/JAMES"}, {"color": "gray", "from": "BAKER", "to": "TRAVELER"}, {"color": "gray", "from": "BAKER", "to": "TSUNG, MARCUS"}, {"color": "gray", "from": "BAKER", "to": "WISDOM, PETER"}, {"color": "gray", "from": "BAKER", "to": "WISDOM, ROMANY"}, {"color": "gray", "from": "BOOMER/TABITHA SMITH", "to": "CANNONBALL II/SAM GU"}, {"color": "gray", "from": "BOOMER/TABITHA SMITH", "to": "DOMINO III/BEATRICE/"}, {"color": "gray", "from": "BOOMER/TABITHA SMITH", "to": "THUNDERBIRD II/JAMES"}, {"color": "gray", "from": "BOOMER/TABITHA SMITH", "to": "BEDLAM/JESSE AARONSO"}, {"color": "gray", "from": "BOOMER/TABITHA SMITH", "to": "WISDOM, PETER"}, {"color": "gray", "from": "BOOMER/TABITHA SMITH", "to": "TSUNG, MARCUS"}, {"color": "gray", "from": "BOOMER/TABITHA SMITH", "to": "WISDOM, ROMANY"}, {"color": "gray", "from": "BOOMER/TABITHA SMITH", "to": "ABEL"}, {"color": "gray", "from": "BOOMER/TABITHA SMITH", "to": "CHARLIE"}, {"color": "gray", "from": "BOOMER/TABITHA SMITH", "to": "TRAVELER"}, {"color": "gray", "from": "THUNDERBIRD II/JAMES", "to": "CANNONBALL II/SAM GU"}, {"color": "gray", "from": "THUNDERBIRD II/JAMES", "to": "DOMINO III/BEATRICE/"}, {"color": "gray", "from": "THUNDERBIRD II/JAMES", "to": "BEDLAM/JESSE AARONSO"}, {"color": "gray", "from": "THUNDERBIRD II/JAMES", "to": "WISDOM, PETER"}, {"color": "gray", "from": "THUNDERBIRD II/JAMES", "to": "TSUNG, MARCUS"}, {"color": "gray", "from": "THUNDERBIRD II/JAMES", "to": "WISDOM, ROMANY"}, {"color": "gray", "from": "THUNDERBIRD II/JAMES", "to": "ABEL"}, {"color": "gray", "from": "THUNDERBIRD II/JAMES", "to": "CHARLIE"}, {"color": "gray", "from": "THUNDERBIRD II/JAMES", "to": "TRAVELER"}, {"color": "gray", "from": "TSUNG, MARCUS", "to": "BEDLAM/JESSE AARONSO"}, {"color": "gray", "from": "TSUNG, MARCUS", "to": "CANNONBALL II/SAM GU"}, {"color": "gray", "from": "TSUNG, MARCUS", "to": "DOMINO III/BEATRICE/"}, {"color": "gray", "from": "TSUNG, MARCUS", "to": "WISDOM, PETER"}, {"color": "gray", "from": "TSUNG, MARCUS", "to": "WISDOM, ROMANY"}, {"color": "gray", "from": "TSUNG, MARCUS", "to": "ABEL"}, {"color": "gray", "from": "TSUNG, MARCUS", "to": "CHARLIE"}, {"color": "gray", "from": "TSUNG, MARCUS", "to": "TRAVELER"}, {"color": "gray", "from": "ABEL", "to": "BEDLAM/JESSE AARONSO"}, {"color": "gray", "from": "ABEL", "to": "CANNONBALL II/SAM GU"}, {"color": "gray", "from": "ABEL", "to": "CHARLIE"}, {"color": "gray", "from": "ABEL", "to": "DOMINO III/BEATRICE/"}, {"color": "gray", "from": "ABEL", "to": "TRAVELER"}, {"color": "gray", "from": "ABEL", "to": "WISDOM, PETER"}, {"color": "gray", "from": "ABEL", "to": "WISDOM, ROMANY"}, {"color": "gray", "from": "BEDLAM/JESSE AARONSO", "to": "CANNONBALL II/SAM GU"}, {"color": "gray", "from": "BEDLAM/JESSE AARONSO", "to": "DOMINO III/BEATRICE/"}, {"color": "gray", "from": "BEDLAM/JESSE AARONSO", "to": "WISDOM, PETER"}, {"color": "gray", "from": "BEDLAM/JESSE AARONSO", "to": "WISDOM, ROMANY"}, {"color": "gray", "from": "BEDLAM/JESSE AARONSO", "to": "CHARLIE"}, {"color": "gray", "from": "BEDLAM/JESSE AARONSO", "to": "TRAVELER"}, {"color": "gray", "from": "WISDOM, ROMANY", "to": "WISDOM, PETER"}, {"color": "gray", "from": "WISDOM, ROMANY", "to": "CANNONBALL II/SAM GU"}, {"color": "gray", "from": "WISDOM, ROMANY", "to": "DOMINO III/BEATRICE/"}, {"color": "gray", "from": "WISDOM, ROMANY", "to": "CHARLIE"}, {"color": "gray", "from": "TRAVELER", "to": "CANNONBALL II/SAM GU"}, {"color": "gray", "from": "TRAVELER", "to": "CHARLIE"}, {"color": "gray", "from": "TRAVELER", "to": "DOMINO III/BEATRICE/"}, {"color": "gray", "from": "TRAVELER", "to": "WISDOM, PETER"}, {"color": "gray", "from": "WISDOM, PETER", "to": "CANNONBALL II/SAM GU"}, {"color": "gray", "from": "WISDOM, PETER", "to": "DOMINO III/BEATRICE/"}, {"color": "gray", "from": "WISDOM, PETER", "to": "CHARLIE"}, {"color": "gray", "from": "DOMINO III/BEATRICE/", "to": "CANNONBALL II/SAM GU"}, {"color": "gray", "from": "DOMINO III/BEATRICE/", "to": "CHARLIE"}, {"color": "gray", "from": "CHARLIE", "to": "CANNONBALL II/SAM GU"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {"nodes": {"font": {"size": 18}, "borderWidth": 2, "shadow": true}, "edges": {"color": {"inherit": true}, "smooth": true}, "interaction": {"dragNodes": true, "dragView": true, "zoomView": true}, "physics": {"barnesHut": {"gravitationalConstant": -8000, "springLength": 300}}};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
