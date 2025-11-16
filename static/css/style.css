@@ -4,12 +4,95 @@ body {
     padding: 20px;
 }
 
+h2{
+    text-align: center;
+}
+
+.linha {
+    display: flex;
+    justify-content: center;
+    gap: 20px;        /* Espaço entre Start e End */
+    align-items: flex-start;
+    text-align: center;
+}
+
+.campo {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.linha-inferior {
+    display: flex;
+    justify-content: center;   /* centraliza a linha no meio */
+    gap: 50px;                 /* espaço horizontal entre os dois blocos */
+    margin-top: 5px;
+    margin-left: 32px;
+}
+
+.linha-inferior .campo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;       /* centraliza label e número verticalmente */
+}
+
+.linha-inferior input[type="number"] {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 50px;
+    text-align: center;
+    font-size: 18px;
+}
+
+
+.pequeno input {
+    width: 50px; /* Deixa a caixa menor */
+}
+
+/* O label também pode ficar menor */
+.pequeno label {
+    font-size: 14px;
+}
+
 .titulo {
     color: #333;
     margin-bottom: 20px;
+}
+
+.botao-centro {
+    display: flex;
+    justify-content: center;
+    margin-top: 3px;
 }
 
 input, button {
     padding: 8px 12px;
     margin: 5px;
 }
+
+input[type="text"] {
+    width: 350px;
+    height: 50px;
+    text-align: center;   /* centraliza o texto dentro da caixa */
+    font-size: 40px;
+}
+
+.arrow-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;         /* diminui o espaço entre as duas setas */
+    margin-top: 25px; /* aproxima verticalmente das caixas */
+}
+
+
+.seta {
+    font-size: 30px; /* ajuste do tamanho do ícone */
+    transform: scaleX(2); /* aumenta horizontalmente */
+    line-height: 0.5;
+}
+
+
+

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <meta charset="UTF-8">
     <title>Grafo Wikipedia</title>
@@ -8,21 +9,65 @@
 <body>
     <h2>Gerar Grafo Wikipedia</h2>
 
-    <form action="/grafo" method="post">
+    <form id="formulario" action="/grafo" method="post">
 
-        <label for="start">Start:</label><br>
-        <input type="text" name="start" required><br><br>
+        <div class="linha">
+            <div class="campo">
+                <input type="text" name="start" required>
+            </div>
 
-        <label for="end">End:</label><br>
-        <input type="text" name="end" required><br><br>
+        <div class="arrow-stack">
+            <span class="material-symbols-outlined seta">arrow_right_alt</span>
+            <span class="material-symbols-outlined seta">arrow_left_alt</span>
+        </div>
 
-        <label for="depth">Profundidade:</label><br>
-        <input type="number" name="depth" value="3" required><br><br>
+            <div class="campo">
+                <input type="text" name="end" required>
+            </div>
+        </div>
 
-        <label for="paths">Número máx. de caminhos:</label><br>
-        <input type="number" name="paths" value="5" required><br><br>
+        <div class="linha-inferior">
+            <div class="campo">
+                <label for="depth">Profundidade:</label>
+                <input type="number" name="depth" value="3" required>
+            </div>
 
-        <button type="submit">Gerar Grafo</button>
+            <div class="campo">
+                <label for="paths">Nº máx. caminhos:</label>
+                <input type="number" name="paths" value="5" required>
+            </div>
+        </div>
+
+        <div class="botao-centro">
+            <button type="submit">Gerar Grafo</button>
+        </div>
+
     </form>
+<div id="resultado" style="display: flex; justify-content: center; margin-left: 35px;">
+    <iframe id="grafoFrame" style="width:600px; height:600px; border:none; display:none; overflow:hidden;"></iframe>
+</div>
+
+<script>
+document.getElementById("formulario").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let formData = new FormData(this);
+
+    fetch("/grafo", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.html_file) {
+            document.getElementById("grafoFrame").src = data.html_file;
+            document.getElementById("grafoFrame").style.display = "block";
+        } else {
+            alert("Erro: " + data.error);
+        }
+    });
+});
+</script>
+
 </body>
 </html>

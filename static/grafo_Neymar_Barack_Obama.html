@@ -33,7 +33,7 @@
 
              #mynetwork {
                  width: 100%;
-                 height: 800px;
+                 height: 590px;
                  background-color: #0d1117;
                  border: 1px solid lightgray;
                  position: relative;
@@ -88,7 +88,7 @@
                   
 
                   // parsing and collecting nodes and edges from the python
-                  nodes = new vis.DataSet([{"color": "red", "font": {"color": "white"}, "id": "Neymar", "label": "Neymar", "shape": "dot", "size": 40}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Estados Unidos", "label": "Estados Unidos", "shape": "dot"}, {"color": "green", "font": {"color": "white"}, "id": "Barack Obama", "label": "Barack Obama", "shape": "dot", "size": 40}]);
+                  nodes = new vis.DataSet([{"color": "red", "font": {"color": "white"}, "id": "Neymar", "label": "Neymar", "shape": "dot", "size": 45, "title": "Neymar"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Estados Unidos", "label": "Estados Unidos", "shape": "dot", "title": "Estados Unidos"}, {"color": "green", "font": {"color": "white"}, "id": "Barack Obama", "label": "Barack Obama", "shape": "dot", "size": 45, "title": "Barack Obama"}]);
                   edges = new vis.DataSet([{"from": "Neymar", "to": "Estados Unidos"}, {"from": "Estados Unidos", "to": "Barack Obama"}]);
 
                   nodeColors = {};
@@ -100,43 +100,7 @@
                   // adding nodes and edges to the graph
                   data = {nodes: nodes, edges: edges};
 
-                  var options = {
-    "configure": {
-        "enabled": false
-    },
-    "edges": {
-        "color": {
-            "inherit": true
-        },
-        "smooth": {
-            "enabled": true,
-            "type": "dynamic"
-        }
-    },
-    "interaction": {
-        "dragNodes": true,
-        "hideEdgesOnDrag": false,
-        "hideNodesOnDrag": false
-    },
-    "physics": {
-        "barnesHut": {
-            "avoidOverlap": 0,
-            "centralGravity": 0.3,
-            "damping": 0.09,
-            "gravitationalConstant": -80000,
-            "springConstant": 0.001,
-            "springLength": 250
-        },
-        "enabled": true,
-        "stabilization": {
-            "enabled": true,
-            "fit": true,
-            "iterations": 1000,
-            "onlyDynamicEdges": false,
-            "updateInterval": 50
-        }
-    }
-};
+                  var options = {"nodes": {"shape": "dot", "size": 25, "font": {"size": 18, "color": "#ffffff", "strokeWidth": 2, "strokeColor": "#000000"}, "borderWidth": 3, "borderWidthSelected": 5, "color": {"border": "#ffffff", "background": "#63b3ed", "highlight": {"border": "#ff4d4d", "background": "#ff8080"}, "hover": {"border": "#ff4d4d", "background": "#ff8080"}}}, "edges": {"color": {"color": "#aaaaaa", "highlight": "#ff4d4d"}, "smooth": {"type": "continuous", "roundness": 0.4}, "width": 1.5}, "layout": {"improvedLayout": true}, "physics": {"enabled": true, "barnesHut": {"gravitationalConstant": -15000, "centralGravity": 0.1, "springLength": 400, "springConstant": 0.03, "damping": 0.15, "avoidOverlap": 1}}, "interaction": {"dragNodes": true, "hover": true, "zoomView": true}};
 
                   
 
