@@ -49,7 +49,19 @@ def gerar_edges(start_title, end_title, max_depth, max_paths):
     #             queue.append((link, new_path))
 
     # ---- extrai somente arestas dos caminhos encontrados ----
-    edges = [('Neymar', 'Estados Unidos'), ('Estados Unidos', 'Barack Obama')] # PARA TESTES USAR SOMENTE ESSA LINHA E COMENTAR AS OUTRAS DESSA FUNCAO
+    # edges = [('Neymar', 'Estados Unidos'), ('Estados Unidos', 'Barack Obama'), ('Neymar', 'Joe Biden'), ('Joe Biden', 'Barack Obama')] # PARA TESTES USAR SOMENTE ESSA LINHA E COMENTAR AS OUTRAS DESSA FUNCAO
+    edges = [
+        ('A', 'B'),('B', 'C'),
+        ('A', 'D'),('D', 'C'),
+        ('A', 'E'),('E', 'C'),
+        ('A', 'F'),('F', 'C'),
+        ('A', 'G'),('G', 'C'),
+    ]
+
+
+
+
+
     # edges = []
 
     # seen = set()
