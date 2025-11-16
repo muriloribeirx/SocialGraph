@@ -10,30 +10,31 @@ def gerar_grafo(edges, start, end):
     net = Network(
         height="590px",
         width="100%",
-        bgcolor="#0d1117",
-        font_color="white"
+        bgcolor="#f8f8f8",  # fundo claro
+        font_color="black"  # texto escuro pra contrastar
     )
 
-    # Aplicar o estilo personalizado (SEU CÓDIGO)
     net.set_options("""
     {
       "nodes": {
         "shape": "dot",
         "size": 25,
-        "font": { "size": 18, "color": "#ffffff", "strokeWidth": 2, "strokeColor": "#000000" },
-        "borderWidth": 3,
-        "borderWidthSelected": 5,
+        "font": { "size": 18, "color": "#000000" },
+        "borderWidth": 2,                     
         "color": {
-          "border": "#ffffff",
-          "background": "#63b3ed",
-          "highlight": { "border": "#ff4d4d", "background": "#ff8080" },
-          "hover": { "border": "#ff4d4d", "background": "#ff8080" }
+          "border": "#000000",           
+          "background": "#ffffff",        
+          "highlight": { "border": "#ff4d4d", "background": "#ffe0e0" },
+          "hover": { "border": "#ff4d4d", "background": "#ffe0e0" }
         }
       },
       "edges": {
-        "color": { "color": "#aaaaaa", "highlight": "#ff4d4d" },
+        "color": { "color": "#000000" },   
         "smooth": { "type": "continuous", "roundness": 0.4 },
-        "width": 1.5
+        "width": 1.5,
+        "arrows": {
+            "middle": { "enabled": true, "scaleFactor": 1.5 }
+        }
       },
       "layout": { "improvedLayout": true },
       "physics": {
@@ -57,15 +58,34 @@ def gerar_grafo(edges, start, end):
         net.add_node(b, label=b, title=b)
         net.add_edge(a, b)
 
+    for node in net.node_ids:
+        net.get_node(node)["color"] = {
+            "border": "#000000",
+            "background": "#2F7ED0",  # cor do nó
+            "highlight": { "border": "#000000", "background": "#5FA6E0" },
+            "hover": { "border": "#000000", "background": "#5FA6E0" }
+        }
+
+
     # Destacar início
     if start in net.node_ids:
-        net.get_node(start)["color"] = "red"
-        net.get_node(start)["size"] = 45
+        net.get_node(start)["color"] =  {
+            "border": "#000000",
+            "background" : "#7ed02f",
+            "highlight": { "border": "#000000", "background": "#96e24f" },
+            "hover": { "border": "#000000", "background": "#96e24f" }
+        }
+        net.get_node(start)["size"] = 35
 
     # Destacar fim
     if end in net.node_ids:
-        net.get_node(end)["color"] = "green"
-        net.get_node(end)["size"] = 45
+        net.get_node(end)["color"] = {
+            "border": "#000000",
+            "background" :"#D02F2F",
+            "highlight": { "border": "#000000", "background": "#E74B4B" },
+            "hover": { "border": "#000000", "background": "#E74B4B" }
+        }
+        net.get_node(end)["size"] = 35
 
     # Nome do arquivo
     filename = f"grafo_{start}_{end}.html".replace(" ", "_")
