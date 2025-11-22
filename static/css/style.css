@@ -93,5 +93,35 @@ input[type="text"] {
     line-height: 0.5;
 }
 
+  /* Estilo do título principal */
+.titulo-grafo {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  text-align: center;
+  font-size: 2rem;
+  letter-spacing: 0.5px;
+  color: #222;
+  margin-top: 25px;
+  margin-bottom: 20px;
+}
+
+  /* remove margens/espacos padrão do navegador */
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: transparent;
+  }
+
+  /* remove paddings/margens de elementos gráficos */
+  svg, canvas, #mynetwork, #network, .vis-network {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block;
+    box-sizing: border-box;
+  }
 
 

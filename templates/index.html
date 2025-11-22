@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <meta charset="UTF-8">
     <title>Grafo Wikipedia</title>
+    <style>
+
+  /* se a lib usar um container com id diferente, inclua ele aqui */
+</style>
+
 </head>
 <body>
-    <h2>Gerar Grafo Wikipedia</h2>
+    <h2 class="titulo-grafo">Gerar Grafo Wikipedia</h2>
 
     <form id="formulario" action="/grafo" method="post">
 
@@ -44,30 +50,57 @@
 
     </form>
 <div id="resultado" style="display: flex; justify-content: center; margin-left: 35px;">
-    <iframe id="grafoFrame" style="width:600px; height:600px; border:none; display:none; overflow:hidden;"></iframe>
+    <iframe id="grafoFrame"
+            style="width:600px; height: 600px; border:4px solid #000; border-radius: 8px; display: none; overflow: hidden; background:white"></iframe>
 </div>
 
 <script>
+const iframe = document.getElementById("grafoFrame");
+
 document.getElementById("formulario").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    let formData = new FormData(this);
-
-    fetch("/grafo", {
-        method: "POST",
-        body: formData
-    })
+  e.preventDefault();
+  let formData = new FormData(this);
+  fetch("/grafo", { method: "POST", body: formData })
     .then(res => res.json())
     .then(data => {
-        if (data.html_file) {
-            document.getElementById("grafoFrame").src = data.html_file;
-            document.getElementById("grafoFrame").style.display = "block";
-        } else {
-            alert("Erro: " + data.error);
-        }
+      if (data.html_file) {
+        iframe.src = data.html_file;
+        iframe.style.display = "block";
+      } else {
+        alert("Erro: " + data.error);
+      }
     });
 });
+
+// quando o iframe terminar de carregar, injeta CSS (funciona só se for mesma origem)
+iframe.addEventListener("load", () => {
+  try {
+    const doc = iframe.contentDocument || iframe.contentWindow.document;
+    if (!doc) return;
+
+    // Cria e injeta um bloco de estilo que zera margens/paddings
+    const style = doc.createElement('style');
+    style.innerHTML = `
+      html, body { margin: 0 !important; padding: 0 !important; overflow: hidden; height: 100%; box-sizing: border-box; background: transparent; }
+      svg, canvas, div { margin: 0 !important; padding: 0 !important; display: block; box-sizing: border-box; }
+      #mynetwork, #network, .vis-network { width: 100% !important; height: 100% !important; margin: 0 !important; padding: 0 !important; }
+    `;
+    (doc.head || doc.documentElement).appendChild(style);
+
+    // opcional: forçar o container principal a ocupar tudo
+    const main = doc.getElementById('mynetwork') || doc.getElementById('network');
+    if (main) {
+      main.style.width = '100%';
+      main.style.height = '100%';
+      main.style.margin = '0';
+      main.style.padding = '0';
+    }
+  } catch (err) {
+    console.warn('Não foi possível injetar CSS no iframe (provável cross-origin):', err);
+  }
+});
 </script>
+
 
 </body>
 </html>

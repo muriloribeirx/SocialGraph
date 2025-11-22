@@ -33,7 +33,7 @@
 
              #mynetwork {
                  width: 100%;
-                 height: 590px;
+                 height: 600px;
                  background-color: #f8f8f8;
                  border: 1px solid lightgray;
                  position: relative;
@@ -88,8 +88,8 @@
                   
 
                   // parsing and collecting nodes and edges from the python
-                  nodes = new vis.DataSet([{"color": {"background": "#7ed02f", "border": "#000000", "highlight": {"background": "#96e24f", "border": "#000000"}, "hover": {"background": "#96e24f", "border": "#000000"}}, "font": {"color": "black"}, "id": "Neymar", "label": "Neymar", "shape": "dot", "size": 35, "title": "Neymar"}, {"color": {"background": "#2F7ED0", "border": "#000000", "highlight": {"background": "#5FA6E0", "border": "#000000"}, "hover": {"background": "#5FA6E0", "border": "#000000"}}, "font": {"color": "black"}, "id": "Estados Unidos", "label": "Estados Unidos", "shape": "dot", "title": "Estados Unidos"}, {"color": {"background": "#2F7ED0", "border": "#000000", "highlight": {"background": "#5FA6E0", "border": "#000000"}, "hover": {"background": "#5FA6E0", "border": "#000000"}}, "font": {"color": "black"}, "id": "Barack Obama", "label": "Barack Obama", "shape": "dot", "title": "Barack Obama"}]);
-                  edges = new vis.DataSet([{"from": "Neymar", "to": "Estados Unidos"}, {"from": "Estados Unidos", "to": "Barack Obama"}]);
+                  nodes = new vis.DataSet([{"color": {"background": "#7ed02f", "border": "#000000", "highlight": {"background": "#96e24f", "border": "#000000"}, "hover": {"background": "#96e24f", "border": "#000000"}}, "fixed": true, "font": {"color": "black"}, "id": "B", "label": "B", "physics": false, "shape": "dot", "size": 35, "title": "B", "x": -500, "y": 0}, {"color": {"background": "#D02F2F", "border": "#000000", "highlight": {"background": "#E74B4B", "border": "#000000"}, "hover": {"background": "#E74B4B", "border": "#000000"}}, "fixed": true, "font": {"color": "black"}, "id": "C", "label": "C", "physics": false, "shape": "dot", "size": 35, "title": "C", "x": 500, "y": 0}, {"color": {"background": "#2F7ED0", "border": "#000000", "highlight": {"background": "#5FA6E0", "border": "#000000"}, "hover": {"background": "#5FA6E0", "border": "#000000"}}, "font": {"color": "black"}, "id": "A", "label": "A", "shape": "dot", "title": "A"}, {"color": {"background": "#2F7ED0", "border": "#000000", "highlight": {"background": "#5FA6E0", "border": "#000000"}, "hover": {"background": "#5FA6E0", "border": "#000000"}}, "font": {"color": "black"}, "id": "Alfabeto etrusco", "label": "Alfabeto etrusco", "shape": "dot", "title": "Alfabeto etrusco"}, {"color": {"background": "#2F7ED0", "border": "#000000", "highlight": {"background": "#5FA6E0", "border": "#000000"}, "hover": {"background": "#5FA6E0", "border": "#000000"}}, "font": {"color": "black"}, "id": "Alfabeto fen\u00edcio", "label": "Alfabeto fen\u00edcio", "shape": "dot", "title": "Alfabeto fen\u00edcio"}, {"color": {"background": "#2F7ED0", "border": "#000000", "highlight": {"background": "#5FA6E0", "border": "#000000"}, "hover": {"background": "#5FA6E0", "border": "#000000"}}, "font": {"color": "black"}, "id": "Alfabeto latino", "label": "Alfabeto latino", "shape": "dot", "title": "Alfabeto latino"}]);
+                  edges = new vis.DataSet([{"from": "B", "smooth": {"enabled": true, "roundness": 0, "type": "curvedCW"}, "to": "C"}, {"from": "B", "smooth": {"enabled": true, "roundness": 0, "type": "curvedCW"}, "to": "A"}, {"from": "A", "smooth": {"enabled": true, "roundness": 0, "type": "curvedCW"}, "to": "C"}, {"from": "B", "smooth": {"enabled": true, "roundness": 0, "type": "curvedCW"}, "to": "Alfabeto etrusco"}, {"from": "Alfabeto etrusco", "smooth": {"enabled": true, "roundness": 0, "type": "curvedCW"}, "to": "C"}, {"from": "B", "smooth": {"enabled": true, "roundness": 0, "type": "curvedCW"}, "to": "Alfabeto fen\u00edcio"}, {"from": "Alfabeto fen\u00edcio", "smooth": {"enabled": true, "roundness": 0, "type": "curvedCW"}, "to": "C"}, {"from": "B", "smooth": {"enabled": true, "roundness": 0, "type": "curvedCW"}, "to": "Alfabeto latino"}, {"from": "Alfabeto latino", "smooth": {"enabled": true, "roundness": 0, "type": "curvedCW"}, "to": "C"}]);
 
                   nodeColors = {};
                   allNodes = nodes.get({ returnType: "Object" });
@@ -100,7 +100,7 @@
                   // adding nodes and edges to the graph
                   data = {nodes: nodes, edges: edges};
 
-                  var options = {"nodes": {"shape": "dot", "size": 25, "font": {"size": 18, "color": "#000000"}, "borderWidth": 2, "color": {"border": "#000000"}}, "edges": {"color": {"color": "#000000"}, "smooth": {"type": "continuous", "roundness": 0.4}, "width": 1.5, "arrows": {"middle": {"enabled": true, "scaleFactor": 1.5}}}, "layout": {"improvedLayout": true}, "physics": {"enabled": true, "barnesHut": {"gravitationalConstant": -15000, "centralGravity": 0.1, "springLength": 400, "springConstant": 0.03, "damping": 0.15, "avoidOverlap": 1}}, "interaction": {"dragNodes": true, "hover": true, "zoomView": true}};
+                  var options = {"nodes": {"shape": "dot", "size": 25, "font": {"size": 18, "color": "#000000"}, "borderWidth": 2, "color": {"border": "#000000"}}, "edges": {"color": {"color": "#000000"}, "smooth": {"enabled": true}, "width": 1.5, "arrows": {"middle": {"enabled": true, "scaleFactor": 3}}}, "layout": {"improvedLayout": true}, "physics": {"enabled": true, "barnesHut": {"gravitationalConstant": -15000, "centralGravity": 0.1, "springLength": 400, "springConstant": 0.03, "damping": 0.15, "avoidOverlap": 1}}, "interaction": {"dragNodes": true, "hover": true, "zoomView": true}};
 
                   
 
