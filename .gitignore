@@ -23,3 +23,10 @@ dist/
 
 # Environment files
 .env
+
+# Ignore generated Wikipedia edges file
+wikipedia_edges.py
+
+# Ignore any generated HTML files inside static/ (root and subfolders)
+static/*.html
+static/**/*.html

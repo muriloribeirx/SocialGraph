@@ -13,63 +13,95 @@
 
 </head>
 <body>
-    <h2 class="titulo-grafo">Gerar Grafo Wikipedia</h2>
+    <!-- <h2 class="titulo-grafo">Gerar Grafo Wikipedia</h2> -->
+    <div class="container">
+        <h2>Gerar Grafo Wikipedia</h2>
 
-    <form id="formulario" action="/grafo" method="post">
+        <form id="formulario" action="/grafo" method="post" aria-label="Formulário gerar grafo">
 
-        <div class="linha">
-            <div class="campo">
-                <input type="text" name="start" required>
+            <div class="form-row">
+                <div class="campo">
+                    <input type="text" name="start" required placeholder="Página inicial">
+                </div>
+
+                <div class="arrow-stack">
+                    <span class="material-symbols-outlined seta" aria-hidden="true">arrow_right_alt</span>
+                    <span class="material-symbols-outlined seta" aria-hidden="true">arrow_left_alt</span>
+                </div>
+
+                <div class="campo">
+                    <input type="text" name="end" required placeholder="Página final">
+                </div>
             </div>
 
-        <div class="arrow-stack">
-            <span class="material-symbols-outlined seta">arrow_right_alt</span>
-            <span class="material-symbols-outlined seta">arrow_left_alt</span>
-        </div>
+            <div class="controls-bottom">
+                <div class="campo">
+                    <label for="depth">Profundidade:</label>
+                    <input class="small-input" id="depth" type="number" name="depth" value="3" required>
+                </div>
 
-            <div class="campo">
-                <input type="text" name="end" required>
+                <div class="campo">
+                    <label for="paths">Nº máx. caminhos:</label>
+                    <input class="small-input" id="paths" type="number" name="paths" value="5" required>
+                </div>
+
+                <div class="botao-centro">
+                    <button type="submit" id="submitBtn" aria-live="polite">
+                        <span class="btn-spinner" aria-hidden="true"></span>
+                        <span class="btn-text">Gerar Grafo</span>
+                    </button>
+                </div>
             </div>
+
+        </form>
+
+        <div id="resultado">
+            <iframe id="grafoFrame" title="Grafo gerado" style="display:none"></iframe>
         </div>
-
-        <div class="linha-inferior">
-            <div class="campo">
-                <label for="depth">Profundidade:</label>
-                <input type="number" name="depth" value="3" required>
-            </div>
-
-            <div class="campo">
-                <label for="paths">Nº máx. caminhos:</label>
-                <input type="number" name="paths" value="5" required>
-            </div>
-        </div>
-
-        <div class="botao-centro">
-            <button type="submit">Gerar Grafo</button>
-        </div>
-
-    </form>
-<div id="resultado" style="display: flex; justify-content: center; margin-left: 35px;">
-    <iframe id="grafoFrame"
-            style="width:600px; height: 600px; border:4px solid #000; border-radius: 8px; display: none; overflow: hidden; background:white"></iframe>
-</div>
+    </div>
 
 <script>
-const iframe = document.getElementById("grafoFrame");
+const form = document.getElementById('formulario');
+const submitBtn = document.getElementById('submitBtn');
+const btnSpinner = submitBtn.querySelector('.btn-spinner');
+const btnText = submitBtn.querySelector('.btn-text');
+const iframe = document.getElementById('grafoFrame');
 
-document.getElementById("formulario").addEventListener("submit", function(e) {
-  e.preventDefault();
-  let formData = new FormData(this);
-  fetch("/grafo", { method: "POST", body: formData })
-    .then(res => res.json())
-    .then(data => {
-      if (data.html_file) {
-        iframe.src = data.html_file;
-        iframe.style.display = "block";
-      } else {
-        alert("Erro: " + data.error);
-      }
-    });
+function setLoading(on){
+    if(on){
+        submitBtn.disabled = true;
+        btnSpinner.style.display = 'inline-block';
+        btnText.textContent = 'Gerando...';
+    } else {
+        submitBtn.disabled = false;
+        btnSpinner.style.display = 'none';
+        btnText.textContent = 'Gerar Grafo';
+    }
+}
+
+form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    setLoading(true);
+    const formData = new FormData(this);
+    try{
+        const res = await fetch('/grafo', {method:'POST', body: formData});
+        const data = await res.json();
+        if(data && data.html_file){
+            iframe.style.display = 'block';
+            // set src after making visible
+            iframe.src = data.html_file;
+            // restore loading once iframe reports loaded (if it loads an external page)
+            iframe.onload = function(){ setLoading(false); };
+            // as a fallback, stop loading after 6s
+            setTimeout(()=>{ setLoading(false); }, 6000);
+        } else {
+            alert('Erro: ' + (data && data.error ? data.error : 'Resposta inválida'));
+            setLoading(false);
+        }
+    }catch(err){
+        alert('Erro: ' + err);
+        setLoading(false);
+    }
 });
 
 // quando o iframe terminar de carregar, injeta CSS (funciona só se for mesma origem)

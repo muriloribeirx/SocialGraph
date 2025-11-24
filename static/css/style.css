@@ -1,127 +1,266 @@
+:root {
+  --bg: #0f1724; /* deep navy */
+  --card: #0b1220;
+  --muted: #9aa4b2;
+  --accent: #7c5cff; /* violet */
+  --accent-2: #5fe3c0; /* teal */
+  --glass: rgba(255, 255, 255, 0.03);
+  --radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
 body {
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
-    padding: 20px;
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+  background: linear-gradient(180deg, #061328 0%, #071227 60%);
+  color: #e6eef8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-h2{
-    text-align: center;
+.container {
+  width: 100%;
+  max-width: 980px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  border-radius: calc(var(--radius) + 4px);
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
-.linha {
-    display: flex;
-    justify-content: center;
-    gap: 20px;        /* Espaço entre Start e End */
-    align-items: flex-start;
-    text-align: center;
+h2 {
+  margin: 0 0 18px 0;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: -0.5px;
+  color: #f1f6ff;
+}
+
+.form-row {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .campo {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
 }
 
-.linha-inferior {
-    display: flex;
-    justify-content: center;   /* centraliza a linha no meio */
-    gap: 50px;                 /* espaço horizontal entre os dois blocos */
-    margin-top: 5px;
-    margin-left: 32px;
+label {
+  font-size: 13px;
+  color: var(--muted);
 }
 
-.linha-inferior .campo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;       /* centraliza label e número verticalmente */
+input[type="text"],
+input[type="number"] {
+  min-width: 220px;
+  max-width: 520px;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.01),
+    rgba(255, 255, 255, 0.015)
+  );
+  color: var(--accent-2);
+  text-align: center;
+  font-size: 16px;
+  outline: none;
+  transition: box-shadow 0.18s ease, transform 0.08s ease,
+    border-color 0.12s ease;
 }
 
-.linha-inferior input[type="number"] {
-    border: none;
-    background: transparent;
-    outline: none;
-    width: 50px;
-    text-align: center;
-    font-size: 18px;
+input[type="text"]::placeholder {
+  color: rgba(230, 238, 248, 0.25);
+  text-align: center;
 }
 
-.pequeno input {
-    width: 50px; /* Deixa a caixa menor */
-}
-
-/* O label também pode ficar menor */
-.pequeno label {
-    font-size: 14px;
-}
-
-.titulo {
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.botao-centro {
-    display: flex;
-    justify-content: center;
-    margin-top: 3px;
-}
-
-input, button {
-    padding: 8px 12px;
-    margin: 5px;
-}
-
-input[type="text"] {
-    width: 350px;
-    height: 50px;
-    text-align: center;   /* centraliza o texto dentro da caixa */
-    font-size: 40px;
+input[type="text"]:focus,
+input[type="number"]:focus {
+  box-shadow: 0 6px 18px rgba(124, 92, 255, 0.12);
+  border-color: rgba(124, 92, 255, 0.4);
+  transform: translateY(-1px);
 }
 
 .arrow-stack {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0px;         /* diminui o espaço entre as duas setas */
-    margin-top: 25px; /* aproxima verticalmente das caixas */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 4px;
 }
-
 
 .seta {
-    font-size: 30px; /* ajuste do tamanho do ícone */
-    transform: scaleX(2); /* aumenta horizontalmente */
-    line-height: 0.5;
+  font-size: 22px;
+  color: var(--muted);
+  transform: none;
 }
 
-  /* Estilo do título principal */
+.controls-bottom {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.small-input {
+  width: 76px;
+}
+
+.botao-centro {
+  display: flex;
+  justify-content: center;
+}
+
+button[type="submit"] {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #061328;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(92, 63, 255, 0.16);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+button[type="submit"]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(92, 63, 255, 0.18);
+}
+
+#resultado {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+}
+#grafoFrame {
+  width: 700px;
+  height: 640px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: var(--card);
+  overflow: hidden;
+}
+
+/* Responsive */
+@media (max-width: 880px) {
+  .container {
+    padding: 18px;
+  }
+  input[type="text"] {
+    font-size: 15px;
+  }
+  #grafoFrame {
+    width: 92%;
+    height: 540px;
+  }
+}
+
+@media (max-width: 520px) {
+  .form-row {
+    gap: 12px;
+  }
+  .arrow-stack {
+    display: none;
+  }
+  .small-input {
+    width: 68px;
+  }
+  #grafoFrame {
+    height: 480px;
+  }
+}
+
+/* Utility */
+.muted {
+  color: var(--muted);
+}
+
+/* Accessibility focus visible */
+:focus {
+  outline: 3px solid rgba(124, 92, 255, 0.12);
+  outline-offset: 2px;
+}
+
+/* Button spinner */
+.btn-spinner {
+  display: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  border-top-color: #ffffff;
+  margin-right: 8px;
+  vertical-align: middle;
+  box-sizing: border-box;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+button[disabled] {
+  opacity: 0.78;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Estilo do título principal */
+/* Optional title styling for graph view (light-on-dark) */
 .titulo-grafo {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 700;
   text-align: center;
   font-size: 2rem;
   letter-spacing: 0.5px;
-  color: #222;
-  margin-top: 25px;
-  margin-bottom: 20px;
+  color: #f1f6ff; /* keep readable on dark background */
+  margin-top: 18px;
+  margin-bottom: 18px;
 }
 
-  /* remove margens/espacos padrão do navegador */
-  html, body {
-    margin: 0 !important;
-    padding: 0 !important;
-    height: auto;
-    box-sizing: border-box;
-    overflow-x: hidden;
-    overflow-y: auto;
-    background: transparent;
-  }
-
-  /* remove paddings/margens de elementos gráficos */
-  svg, canvas, #mynetwork, #network, .vis-network {
-    margin: 0 !important;
-    padding: 0 !important;
-    display: block;
-    box-sizing: border-box;
-  }
-
-
+/* Graphic element reset (non-destructive) */
+svg,
+canvas,
+#mynetwork,
+#network,
+.vis-network {
+  margin: 0;
+  padding: 0;
+  display: block;
+  box-sizing: border-box;
+}

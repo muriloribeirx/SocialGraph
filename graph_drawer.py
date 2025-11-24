@@ -9,8 +9,8 @@ def gerar_grafo(edges, start, end):
 
     # Criar grafo PyVis
     net = Network(
-        height="600px",
-        width="600px",
+        # height="600px",
+        # width="600px",
         bgcolor="#ffffff",
         font_color="black"
     )
