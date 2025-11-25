@@ -6,7 +6,7 @@ import datetime
 
 # ========== Inicialização ==========
 wiki = wikipediaapi.Wikipedia(
-    language="pt",
+    language="en",
     user_agent="ProjetoGrafosWikipedia/1.0 (Universidade Federal de Engenharia, aluno: joao.silva@ufeng.br)",
 )
 
